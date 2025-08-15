@@ -1,0 +1,126 @@
+.terms-page {
+  position: relative;
+  min-height: calc(var(--vh, 1vh) * 100);
+  font-family: sans-serif;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  z-index: 0;
+  overflow-x: hidden;
+}
+
+.terms-page::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 100vw;
+  background-image: url("https://storage.123fakturera.se/public/wallpapers/sverige43.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  z-index: -1;
+  pointer-events: none;
+}
+
+.terms-header {
+  text-align: center;
+  padding: 1rem;
+  color: white;
+  max-width: 100%;
+}
+
+.back-button {
+  background-color: rgb(8, 158, 30);
+  color: white;
+  font-size: 16px;
+  font-weight: 500;
+  border: none;
+  border-radius: 50px;
+  margin-top: 20px;
+  margin-bottom: 40px;
+  cursor: pointer;
+  width: 35vw;
+  padding: 1rem 40px;
+  min-width: max-content;
+  max-width: 270px;
+  transition: background-color 0.3s ease;
+}
+
+.back-button:hover {
+  background-color: rgb(6, 120, 22);
+}
+
+.bottom-button {
+  background-color: rgb(8, 158, 30);
+  color: white;
+  font-size: 1.1rem;
+  border: none;
+  border-radius: 25px;
+  margin-top: 20px;
+  margin-bottom: 40px;
+  cursor: pointer;
+  width: 35vw;
+  padding: 1rem 40px;
+  min-width: max-content;
+  max-width: 270px;
+  transition: background-color 0.3s ease;
+}
+
+.bottom-button:hover {
+  background-color: rgb(6, 120, 22);
+}
+
+.term {
+  font-size: 1.5rem;
+  margin: 0;
+}
+
+/* Responsive Design */
+@media (max-width: 1270px) {
+  .back-button {
+    margin-top: 20px;
+    margin-bottom: 45px;
+    font-size: 1.1rem;
+    width: 50%;
+  }
+  
+  .term {
+    margin-top: 25px;
+    margin-bottom: 5px;
+    font-size: 1.5rem;
+  }
+}
+
+@media (max-width: 675px) {
+  .back-button {
+    margin-top: 20px;
+    margin-bottom: -20px;
+    font-size: 1.1rem;
+    width: 50%;
+  }
+  
+  .term {
+    margin-top: 15px;
+    margin-bottom: -5px;
+    font-size: 1.5rem;
+  }
+}
+
+@media (max-width: 500px) {
+  .back-button {
+    margin-top: 20px;
+    margin-bottom: -35px;
+    font-size: 1.1rem;
+    border-radius: 50px;
+    width: 50%;
+  }
+  
+  .term {
+    margin-top: 15px;
+    margin-bottom: -5px;
+    font-size: 1.5rem;
+  }
+}
