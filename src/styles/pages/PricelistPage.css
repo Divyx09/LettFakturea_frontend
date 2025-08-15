@@ -1,0 +1,23 @@
+.page-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background-color: #f8f9fa;
+}
+
+.main-content {
+  display: flex;
+  flex: 1;
+}
+
+.content-area {
+  flex: 1;
+  margin-left: 220px;
+  transition: margin-left 0.3s ease;
+}
+
+@media (max-width: 1271px) {
+  .content-area {
+    margin-left: 0;
+  }
+}

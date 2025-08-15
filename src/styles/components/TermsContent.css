@@ -1,0 +1,52 @@
+.terms-content {
+  background-color: white;
+  margin: -1rem 2.3rem 0;
+  border-radius: 20px;
+  max-width: 750px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+  font-weight: 500;
+  line-height: 1.6em;
+  font-size: 16px;
+  font-family: "Open Sans", sans-serif !important;
+  text-align: center;
+  transition: all 0.3s ease;
+  padding: 40px;
+  color: rgba(0, 0, 0, 0.6);
+}
+
+.terms-text-block {
+  margin-bottom: 1rem;
+}
+
+.terms-paragraph {
+  margin-bottom: 0.8rem;
+  line-height: 1.6;
+}
+
+.terms-paragraph:last-child {
+  margin-bottom: 0;
+}
+
+/* Responsive Design */
+@media (max-width: 1270px) {
+  .terms-content {
+    max-width: 750px;
+    font-size: 16px;
+  }
+}
+
+@media (max-width: 675px) {
+  .terms-content {
+    margin: 2rem;
+    font-size: 15px;
+    padding: 40px;
+  }
+}
+
+@media (max-width: 500px) {
+  .terms-content {
+    font-size: 14px;
+    margin: 1.5rem;
+    padding: 40px;
+  }
+}
