@@ -1,12 +1,12 @@
 import React from "react";
 import "../styles/components/Header.css";
-import userIcon from "../assets/images/user2.png";
+import { FaUserCircle } from "react-icons/fa";
 
 const Header = () => {
   return (
     <div className="header">
       <div className="user-info">
-        <img src={userIcon} alt="avatar" className="avatar" />
+        <FaUserCircle className="avatar" />
         <div className="user-text">
           <p className="user-name">Stephen Jhonson</p>
           <p className="company-name">las vegas</p>
