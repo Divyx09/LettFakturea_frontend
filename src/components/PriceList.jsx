@@ -46,19 +46,72 @@ const PriceList = () => {
     fetchProducts();
   }, []);
 
-  const handleFieldChange = (index, field, value) => {
-    setEditedRows((prev) => ({
-      ...prev,
-      [index]: {
-        ...prev[index],
-        [field]: value,
-        id: products[index].id,
-      },
-    }));
+  const handleFieldChange = async (index, field, value) => {
+    const originalValue = products[index][field];
+    
+    // Only save if value actually changed
+    if (originalValue == value) return;
+    
+    try {
+      const productId = products[index].id;
+      const updatedData = { [field]: value };
+      
+      // Call API to update the product
+      await productsService.updateProduct(productId, updatedData);
+      
+      // Update local state on successful save
+      setProducts((prev) =>
+        prev.map((product, i) =>
+          i === index ? { ...product, [field]: value } : product
+        )
+      );
+      
+      console.log(`Product ${field} updated successfully`);
+    } catch (error) {
+      console.error(`Error updating product ${field}:`, error);
+      // Optionally revert the change or show error message
+    }
+  };
+
+  const handleSaveProduct = async (index) => {
+    const editedData = editedRows[index];
+    if (!editedData) return;
+
+    try {
+      const updatedProduct = await productsService.updateProduct(editedData.id, editedData);
+      
+      // Update the local products state
+      setProducts((prev) =>
+        prev.map((product, i) =>
+          i === index ? { ...product, ...editedData } : product
+        )
+      );
+      
+      // Remove from editedRows after successful save
+      setEditedRows((prev) => {
+        const newEdited = { ...prev };
+        delete newEdited[index];
+        return newEdited;
+      });
+      
+      console.log("Product updated successfully:", updatedProduct);
+    } catch (error) {
+      console.error("Error updating product:", error);
+      // You can add a toast notification here
+    }
   };
 
   const handleRowClick = (index) => {
     setFocusedRow(index);
+  };
+
+  const handleKeyPress = async (e, index, field) => {
+    if (e.key === 'Enter') {
+      e.preventDefault();
+      const value = e.target.innerText;
+      await handleFieldChange(index, field, value);
+      e.target.blur(); // Remove focus after saving
+    }
   };
 
   // Determine which columns to show based on screen size
@@ -154,7 +207,8 @@ const PriceList = () => {
             <div className="col-menu">Action</div>
           </div>
 
-          {products.map((product, index) => (
+          {products.map((product, index) => {
+            return (
             <div
               className="table-row"
               key={index}
@@ -191,6 +245,7 @@ const PriceList = () => {
                     onBlur={(e) =>
                       handleFieldChange(index, "articleNo", e.target.innerText)
                     }
+                    onKeyPress={(e) => handleKeyPress(e, index, "articleNo")}
                   >
                     {product.articleNo}
                   </span>
@@ -205,6 +260,7 @@ const PriceList = () => {
                   onBlur={(e) =>
                     handleFieldChange(index, "product", e.target.innerText)
                   }
+                  onKeyPress={(e) => handleKeyPress(e, index, "product")}
                 >
                   {product.product}
                 </span>
@@ -219,6 +275,7 @@ const PriceList = () => {
                     onBlur={(e) =>
                       handleFieldChange(index, "inPrice", e.target.innerText)
                     }
+                    onKeyPress={(e) => handleKeyPress(e, index, "inPrice")}
                   >
                     {product.inPrice}
                   </span>
@@ -233,6 +290,7 @@ const PriceList = () => {
                   onBlur={(e) =>
                     handleFieldChange(index, "price", e.target.innerText)
                   }
+                  onKeyPress={(e) => handleKeyPress(e, index, "price")}
                 >
                   {product.price}
                 </span>
@@ -247,6 +305,7 @@ const PriceList = () => {
                     onBlur={(e) =>
                       handleFieldChange(index, "unit", e.target.innerText)
                     }
+                    onKeyPress={(e) => handleKeyPress(e, index, "unit")}
                   >
                     {product.unit}
                   </span>
@@ -262,6 +321,7 @@ const PriceList = () => {
                     onBlur={(e) =>
                       handleFieldChange(index, "inStock", e.target.innerText)
                     }
+                    onKeyPress={(e) => handleKeyPress(e, index, "inStock")}
                   >
                     {product.inStock}
                   </span>
@@ -275,12 +335,9 @@ const PriceList = () => {
                     contentEditable
                     suppressContentEditableWarning
                     onBlur={(e) =>
-                      handleFieldChange(
-                        index,
-                        "description",
-                        e.target.innerText
-                      )
+                      handleFieldChange(index, "description", e.target.innerText)
                     }
+                    onKeyPress={(e) => handleKeyPress(e, index, "description")}
                   >
                     {product.description}
                   </span>
@@ -289,7 +346,7 @@ const PriceList = () => {
 
               <div className="col-menu more-menu">⋯</div>
             </div>
-          ))}
+          );})}
         </div>
       </div>
     </div>
