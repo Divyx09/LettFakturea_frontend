@@ -1,4 +1,12 @@
 import React, { useEffect, useState } from "react";
+import {
+  FaToggleOn,
+  FaToggleOff,
+  FaCircle,
+  FaPlusCircle,
+} from "react-icons/fa";
+import { FaArrowDown } from "react-icons/fa6";
+import { FaArrowRightLong } from "react-icons/fa6";
 import { productsService } from "../services/dataService";
 import "../styles/components/PriceList.css";
 
@@ -48,56 +56,28 @@ const PriceList = () => {
 
   const handleFieldChange = async (index, field, value) => {
     const originalValue = products[index][field];
-    
+
     // Only save if value actually changed
     if (originalValue == value) return;
-    
+
     try {
       const productId = products[index].id;
       const updatedData = { [field]: value };
-      
+
       // Call API to update the product
       await productsService.updateProduct(productId, updatedData);
-      
+
       // Update local state on successful save
       setProducts((prev) =>
         prev.map((product, i) =>
           i === index ? { ...product, [field]: value } : product
         )
       );
-      
+
       console.log(`Product ${field} updated successfully`);
     } catch (error) {
       console.error(`Error updating product ${field}:`, error);
       // Optionally revert the change or show error message
-    }
-  };
-
-  const handleSaveProduct = async (index) => {
-    const editedData = editedRows[index];
-    if (!editedData) return;
-
-    try {
-      const updatedProduct = await productsService.updateProduct(editedData.id, editedData);
-      
-      // Update the local products state
-      setProducts((prev) =>
-        prev.map((product, i) =>
-          i === index ? { ...product, ...editedData } : product
-        )
-      );
-      
-      // Remove from editedRows after successful save
-      setEditedRows((prev) => {
-        const newEdited = { ...prev };
-        delete newEdited[index];
-        return newEdited;
-      });
-      
-      console.log("Product updated successfully:", updatedProduct);
-    } catch (error) {
-      console.error("Error updating product:", error);
-      // You can add a toast notification here
     }
   };
 
@@ -106,7 +86,7 @@ const PriceList = () => {
   };
 
   const handleKeyPress = async (e, index, field) => {
-    if (e.key === 'Enter') {
+    if (e.key === "Enter") {
       e.preventDefault();
       const value = e.target.innerText;
       await handleFieldChange(index, field, value);
@@ -114,11 +94,42 @@ const PriceList = () => {
     }
   };
 
+  const handleSaveProduct = async (index) => {
+    const editedData = editedRows[index];
+    if (!editedData) return;
+
+    try {
+      const updatedProduct = await productsService.updateProduct(
+        editedData.id,
+        editedData
+      );
+
+      // Update the local products state
+      setProducts((prev) =>
+        prev.map((product, i) =>
+          i === index ? { ...product, ...editedData } : product
+        )
+      );
+
+      // Remove from editedRows after successful save
+      setEditedRows((prev) => {
+        const newEdited = { ...prev };
+        delete newEdited[index];
+        return newEdited;
+      });
+
+      console.log("Product updated successfully:", updatedProduct);
+    } catch (error) {
+      console.error("Error updating product:", error);
+      // You can add a toast notification here
+    }
+  };
+
   // Determine which columns to show based on screen size
   const showDescription = screenSize > 1298;
   const showStock = screenSize > 645;
   const showUnit = screenSize > 710;
-  const showInPrice = screenSize > 785;
+  const showInPrice = screenSize > 1298;
   const showArticle = screenSize > 565;
 
   return (
@@ -147,9 +158,8 @@ const PriceList = () => {
         <div className="action-buttons">
           <button className="action-button">
             <span className="btn-label">New Product</span>
-            <span className="button-icon" role="img" aria-label="New">
-              ➕
-            </span>
+
+            <FaPlusCircle color="#24fa64ff" size={16} />
           </button>
 
           <button className="action-button">
@@ -161,9 +171,11 @@ const PriceList = () => {
 
           <button className="action-button" onClick={toggleAdvancedMode}>
             <span className="btn-label">Advanced mode</span>
-            <span className="button-icon" role="img" aria-label="Mode Switch">
-              {isAdvanced ? "🟢" : "⚪"}
-            </span>
+            {isAdvanced ? (
+              <FaToggleOff color="#ccc" size={24} />
+            ) : (
+              <FaToggleOn color="#1ca7f7ff" size={24} />
+            )}
           </button>
         </div>
       </div>
@@ -188,13 +200,13 @@ const PriceList = () => {
             {showArticle && (
               <div className="col-article">
                 Article No.
-                <span className="arrow blue">↓</span>
+                <FaArrowDown size={14} color="#00bfff" />
               </div>
             )}
 
             <div className="col-name">
               Product/Service
-              <span className="arrow green">↓</span>
+              <FaArrowDown size={14} color="#09ff00ff" />
             </div>
 
             {showInPrice && <div className="col-in-price">In Price</div>}
@@ -204,149 +216,159 @@ const PriceList = () => {
             {showDescription && (
               <div className="col-description">Description</div>
             )}
-            <div className="col-menu">Action</div>
           </div>
 
           {products.map((product, index) => {
             return (
-            <div
-              className="table-row"
-              key={index}
-              onClick={() => handleRowClick(index)}
-              style={{
-                gridTemplateColumns: `30px ${
-                  showArticle ? "100px" : ""
-                } 260px ${showInPrice ? "70px" : ""} 70px ${
-                  showUnit ? "71px" : ""
-                } ${showStock ? "75px" : ""} ${
-                  showDescription ? "270px" : ""
-                } 30px`
-                  .replace(/\s+/g, " ")
-                  .trim(),
-                cursor: "pointer",
-              }}
-            >
               <div
-                className="col-arrow arrow"
+                className="table-row"
+                key={index}
+                onClick={() => handleRowClick(index)}
                 style={{
-                  visibility: focusedRow === index ? "visible" : "hidden",
-                  color: focusedRow === index ? "#00bfff" : "transparent",
+                  gridTemplateColumns: `30px ${
+                    showArticle ? "100px" : ""
+                  } 260px ${showInPrice ? "70px" : ""} 70px ${
+                    showUnit ? "71px" : ""
+                  } ${showStock ? "75px" : ""} ${
+                    showDescription ? "300px" : ""
+                  } 30px`
+                    .replace(/\s+/g, " ")
+                    .trim(),
+                  cursor: "pointer",
                 }}
               >
-                →
-              </div>
-
-              {showArticle && (
-                <div className="col-article">
-                  <span
-                    className="bubble"
-                    contentEditable
-                    suppressContentEditableWarning
-                    onBlur={(e) =>
-                      handleFieldChange(index, "articleNo", e.target.innerText)
-                    }
-                    onKeyPress={(e) => handleKeyPress(e, index, "articleNo")}
-                  >
-                    {product.articleNo}
-                  </span>
-                </div>
-              )}
-
-              <div className="col-name">
-                <span
-                  className="bubble ps-wid"
-                  contentEditable
-                  suppressContentEditableWarning
-                  onBlur={(e) =>
-                    handleFieldChange(index, "product", e.target.innerText)
-                  }
-                  onKeyPress={(e) => handleKeyPress(e, index, "product")}
+                <div
+                  className="col-arrow arrow"
+                  style={{
+                    visibility: focusedRow === index ? "visible" : "hidden",
+                    color: focusedRow === index ? "#00bfff" : "transparent",
+                  }}
                 >
-                  {product.product}
-                </span>
+                  <FaArrowRightLong />
+                </div>
+
+                {showArticle && (
+                  <div className="col-article">
+                    <span
+                      className="bubble"
+                      contentEditable
+                      suppressContentEditableWarning
+                      onBlur={(e) =>
+                        handleFieldChange(
+                          index,
+                          "articleNo",
+                          e.target.innerText
+                        )
+                      }
+                      onKeyPress={(e) => handleKeyPress(e, index, "articleNo")}
+                    >
+                      {product.articleNo}
+                    </span>
+                  </div>
+                )}
+
+                <div className="col-name">
+                  <span
+                    className="bubble ps-wid"
+                    contentEditable
+                    suppressContentEditableWarning
+                    onBlur={(e) =>
+                      handleFieldChange(index, "product", e.target.innerText)
+                    }
+                    onKeyPress={(e) => handleKeyPress(e, index, "product")}
+                  >
+                    {product.product}
+                  </span>
+                </div>
+
+                {showInPrice && (
+                  <div className="col-in-price">
+                    <span
+                      className="bubble"
+                      contentEditable
+                      suppressContentEditableWarning
+                      onBlur={(e) =>
+                        handleFieldChange(index, "inPrice", e.target.innerText)
+                      }
+                      onKeyPress={(e) => handleKeyPress(e, index, "inPrice")}
+                    >
+                      {product.inPrice}
+                    </span>
+                  </div>
+                )}
+
+                <div className="col-price">
+                  <span
+                    className="bubble"
+                    contentEditable
+                    suppressContentEditableWarning
+                    onBlur={(e) =>
+                      handleFieldChange(index, "price", e.target.innerText)
+                    }
+                    onKeyPress={(e) => handleKeyPress(e, index, "price")}
+                  >
+                    {product.price}
+                  </span>
+                </div>
+
+                {showUnit && (
+                  <div className="col-unit">
+                    <span
+                      className="bubble"
+                      contentEditable
+                      suppressContentEditableWarning
+                      onBlur={(e) =>
+                        handleFieldChange(index, "unit", e.target.innerText)
+                      }
+                      onKeyPress={(e) => handleKeyPress(e, index, "unit")}
+                    >
+                      {product.unit}
+                    </span>
+                  </div>
+                )}
+
+                {showStock && (
+                  <div className="col-stock">
+                    <span
+                      className="bubble"
+                      contentEditable
+                      suppressContentEditableWarning
+                      onBlur={(e) =>
+                        handleFieldChange(index, "inStock", e.target.innerText)
+                      }
+                      onKeyPress={(e) => handleKeyPress(e, index, "inStock")}
+                    >
+                      {product.inStock}
+                    </span>
+                  </div>
+                )}
+
+                {showDescription && (
+                  <div className="col-description">
+                    <span
+                      className="bubble decs"
+                      contentEditable
+                      suppressContentEditableWarning
+                      onBlur={(e) =>
+                        handleFieldChange(
+                          index,
+                          "description",
+                          e.target.innerText
+                        )
+                      }
+                      onKeyPress={(e) =>
+                        handleKeyPress(e, index, "description")
+                      }
+                    >
+                      {product.description}
+                    </span>
+                  </div>
+                )}
+
+                <div className="col-menu more-menu">⋯</div>
               </div>
-
-              {showInPrice && (
-                <div className="col-in-price">
-                  <span
-                    className="bubble"
-                    contentEditable
-                    suppressContentEditableWarning
-                    onBlur={(e) =>
-                      handleFieldChange(index, "inPrice", e.target.innerText)
-                    }
-                    onKeyPress={(e) => handleKeyPress(e, index, "inPrice")}
-                  >
-                    {product.inPrice}
-                  </span>
-                </div>
-              )}
-
-              <div className="col-price">
-                <span
-                  className="bubble"
-                  contentEditable
-                  suppressContentEditableWarning
-                  onBlur={(e) =>
-                    handleFieldChange(index, "price", e.target.innerText)
-                  }
-                  onKeyPress={(e) => handleKeyPress(e, index, "price")}
-                >
-                  {product.price}
-                </span>
-              </div>
-
-              {showUnit && (
-                <div className="col-unit">
-                  <span
-                    className="bubble"
-                    contentEditable
-                    suppressContentEditableWarning
-                    onBlur={(e) =>
-                      handleFieldChange(index, "unit", e.target.innerText)
-                    }
-                    onKeyPress={(e) => handleKeyPress(e, index, "unit")}
-                  >
-                    {product.unit}
-                  </span>
-                </div>
-              )}
-
-              {showStock && (
-                <div className="col-stock">
-                  <span
-                    className="bubble"
-                    contentEditable
-                    suppressContentEditableWarning
-                    onBlur={(e) =>
-                      handleFieldChange(index, "inStock", e.target.innerText)
-                    }
-                    onKeyPress={(e) => handleKeyPress(e, index, "inStock")}
-                  >
-                    {product.inStock}
-                  </span>
-                </div>
-              )}
-
-              {showDescription && (
-                <div className="col-description">
-                  <span
-                    className="bubble decs"
-                    contentEditable
-                    suppressContentEditableWarning
-                    onBlur={(e) =>
-                      handleFieldChange(index, "description", e.target.innerText)
-                    }
-                    onKeyPress={(e) => handleKeyPress(e, index, "description")}
-                  >
-                    {product.description}
-                  </span>
-                </div>
-              )}
-
-              <div className="col-menu more-menu">⋯</div>
-            </div>
-          );})}
+            );
+          })}
         </div>
       </div>
     </div>
