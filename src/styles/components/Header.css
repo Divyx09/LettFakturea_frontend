@@ -77,7 +77,7 @@
 }
 
 /* Responsive rule */
-@media (max-width: 1271px) {
+@media (max-width: 1300px) {
   .user-info {
     display: none;
   }

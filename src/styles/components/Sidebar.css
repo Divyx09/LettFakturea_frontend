@@ -13,7 +13,7 @@
 }
 
 .menu-title {
-  font-size: 17px;
+  font-size: 14px;
   font-weight: 600;
   color: #1d1d1f;
   text-align: center;
@@ -41,11 +41,11 @@
 .menu-item {
   display: flex;
   align-items: center;
-  padding: 8px 16px;
+  padding: 6px 16px;
   font-size: 16px;
   color: #333;
   font-family: "Open Sans", sans-serif !important;
-  font-weight: 500;
+  font-weight: 400;
   border-radius: 8px;
   margin-bottom: 4px;
   transition: all 0.2s ease;
@@ -60,7 +60,7 @@
 }
 
 .menu-item:hover::before {
-  content: '';
+  content: "";
   width: 10px;
   height: 10px;
   background-color: #00c853;
@@ -78,7 +78,7 @@
 }
 
 .menu-item.active::before {
-  content: '';
+  content: "";
   width: 10px;
   height: 10px;
   background-color: #00c853;
@@ -103,7 +103,7 @@
 }
 
 .icon {
-  font-size: 16px;
+  font-size: 12px;
   margin-right: 10px;
   margin-left: 10px;
   display: inline-block;
@@ -113,17 +113,17 @@
 .label {
   color: #222;
   letter-spacing: 0.5px;
-  font-size: 15px;
+  font-size: 12px;
   flex: 1;
 }
 
 /* Mobile Responsive */
-@media (max-width: 1100px) {
+@media (max-width: 1300px) {
   .sidebar {
     transform: translateX(-100%);
     z-index: 1000;
   }
-  
+
   .sidebar.open {
     transform: translateX(0);
   }

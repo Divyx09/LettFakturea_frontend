@@ -57,9 +57,9 @@
 .search-input {
   width: 100%;
   padding: 5px 0px 5px 15px;
-  border: 1px solid #e9ebf09f;
+  border: 1px solid #408cf042;
   border-radius: 20px;
-  background-color: #f9fbfd;
+  background-color: #ffffff;
   font-size: 14px;
   outline: none;
 }
@@ -92,10 +92,10 @@
 
 .action-button {
   height: 40px;
-  padding: 4px 12px;
+  padding: 0px 12px;
   font-size: 14px;
   border: none;
-  border-radius: 10px;
+  border-radius: 15px;
   background-color: #ffffff;
   cursor: pointer;
   display: flex;
@@ -115,7 +115,7 @@
 }
 
 /* Hide button text labels under 1100px */
-@media (max-width: 1100px) {
+@media (max-width: 1300px) {
   .pricelist-container {
     padding: 4px 15px !important;
     margin-left: 0px;
@@ -186,7 +186,7 @@
 }
 
 .table-header {
-  font-weight: bold;
+  font-weight: 500;
   color: #333;
 }
 
@@ -208,7 +208,7 @@
 }
 
 .col-name {
-  flex: 1 1 260px;
+  flex: 1 1 220px;
   min-width: 200px;
 }
 .col-name-header {
@@ -227,21 +227,21 @@
 }
 
 .col-price {
-  flex: 0 0 70px;
+  flex: 0 0 80px;
   min-width: 60px;
   text-align: center;
   justify-content: center;
 }
 
 .col-unit {
-  flex: 0 0 71px;
+  flex: 0 0 80px;
   min-width: 50px;
   text-align: center;
   justify-content: center;
 }
 
 .col-stock {
-  flex: 0 0 75px;
+  flex: 0 0 80px;
   min-width: 60px;
   text-align: center;
   justify-content: center;
@@ -274,7 +274,7 @@
   text-align: center;
   padding: 3px 6px;
   font-size: 13px;
-  font-weight: 500;
+  font-weight: 400;
   color: #333;
   width: 100%;
   word-break: break-word;
@@ -303,23 +303,10 @@
   justify-content: center;
 }
 
-/* Responsive Column Hiding with Flexbox */
-@media (max-width: 1298px) {
-  .col-description {
-    flex: 0 0 200px;
-    min-width: 180px;
-  }
-}
-
 @media (max-width: 1185px) {
   .col-unit {
-    flex: 0 0 60px;
-    min-width: 50px;
-  }
-
-  .col-description {
-    flex: 0 0 150px;
-    min-width: 120px;
+    flex: 0 0 80px;
+    min-width: 70px;
   }
 }
 
@@ -336,24 +323,6 @@
     min-width: 80px;
   }
 
-  .col-name {
-    flex: 1 1 280px;
-    min-width: 220px;
-  }
-
-  .col-in-price,
-  .col-price,
-  .col-unit,
-  .col-stock {
-    flex: 0 0 90px;
-    min-width: 70px;
-  }
-
-  .col-description {
-    flex: 0 0 180px;
-    min-width: 150px;
-  }
-
   .arrow {
     display: none;
   }
@@ -361,8 +330,8 @@
 
 @media (max-width: 1060px) {
   .col-article {
-    flex: 0 0 100px;
-    min-width: 100px;
+    flex: 0 0 90px;
+    min-width: 90px;
     justify-content: center;
   }
   .col-name {
@@ -371,14 +340,6 @@
   }
   .col-name-header {
     margin-left: 10px;
-  }
-
-  .col-in-price,
-  .col-price,
-  .col-unit,
-  .col-stock {
-    flex: 0 0 80px;
-    min-width: 65px;
   }
 }
 

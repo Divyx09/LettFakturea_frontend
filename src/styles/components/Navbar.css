@@ -151,7 +151,7 @@
   margin-right: 77px;
 }
 
-@media (max-width: 1271px) {
+@media (max-width: 1300px) {
   .nav-links > li:not(.language) {
     display: none;
   }

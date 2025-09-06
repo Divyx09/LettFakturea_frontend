@@ -126,10 +126,10 @@ const PriceList = () => {
   };
 
   // Determine which columns to show based on screen size
-  const showDescription = screenSize > 1298;
+  const showDescription = screenSize > 1024;
   const showStock = screenSize > 645;
   const showUnit = screenSize > 710;
-  const showInPrice = screenSize > 1298;
+  const showInPrice = screenSize > 1024;
   const showArticle = screenSize > 710;
 
   return (
