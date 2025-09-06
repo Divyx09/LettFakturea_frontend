@@ -567,6 +567,10 @@
 }
 
 @media (max-width: 500px) {
+  .pricelist-container {
+    padding: 4px 0px !important;
+    margin-left: 0px;
+  }
   .col-name {
     flex: 1 1 215px;
     min-width: 170px;
