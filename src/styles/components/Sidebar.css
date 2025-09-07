@@ -118,7 +118,7 @@
 }
 
 /* Mobile Responsive */
-@media (max-width: 1300px) {
+@media (max-width: 1360px) {
   .sidebar {
     transform: translateX(-100%);
     z-index: 1000;

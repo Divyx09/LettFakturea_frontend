@@ -115,7 +115,7 @@
 }
 
 /* Hide button text labels under 1100px */
-@media (max-width: 1300px) {
+@media (max-width: 1360px) {
   .pricelist-container {
     padding: 4px 15px !important;
     margin-left: 0px;
