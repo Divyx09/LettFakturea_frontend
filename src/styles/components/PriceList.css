@@ -245,7 +245,7 @@
 }
 .col-article .bubble {
   text-align: start;
-  padding-left: 10px;
+  /* padding-left: 10px !important; */
 }
 
 .col-name {
