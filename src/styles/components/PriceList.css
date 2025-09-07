@@ -1,19 +1,12 @@
 .pricelist-container {
-  padding: 10px 20px !important;
+  padding: 10px 20px;
   margin-left: 220px;
   font-family: "Open Sans", sans-serif !important;
   background-color: #fff;
-  min-height: calc(100vh - 60px);
+  height: 100vh; 
   box-sizing: border-box;
-  padding-top: 80px !important; /* Account for fixed header (60px) + extra spacing */
-}
-
-/* Remove top padding on small screens where header is not fixed */
-@media (max-width: 710px) {
-  .pricelist-container {
-    padding-top: 10px !important;
-    margin-left: 0;
-  }
+  padding-top: 80px;
+  overflow: hidden; 
 }
 
 /* Top bar containing search and buttons */
@@ -21,7 +14,6 @@
   display: flex;
   justify-content: space-between;
   flex-wrap: wrap;
-  /* align-items: center; */
   margin-bottom: 20px;
   margin-top: 15px;
   margin-right: 10px;
@@ -126,9 +118,10 @@
 /* Hide button text labels under 1100px */
 @media (max-width: 1360px) {
   .pricelist-container {
-    padding: 4px 15px !important;
+    padding: 4px 15px;
     margin-left: 0px;
-    padding-top: 80px !important;
+    padding-top: 80px;
+    overflow: hidden; /* Maintain no scroll behavior */
   }
 }
 
@@ -139,6 +132,15 @@
   .action-button {
     padding: 5px 40px;
     border-radius: 20px;
+  }
+}
+
+@media (max-width: 710px) {
+  .pricelist-container {
+    padding-top: 10px !important;
+    margin-left: 0;
+    height: auto; 
+    overflow: visible; 
   }
 }
 
@@ -181,10 +183,36 @@
   width: 100%;
   border-collapse: collapse;
   padding: 0 10px 0 0px;
+  display: flex;
+  flex-direction: column;
+  height: calc(100vh - 200px); 
   /* border: 1px solid #e0e0e0; */
 }
 
-/* Flexbox Layout for Table Rows and Headers */
+.table-body {
+  flex: 1;
+  overflow-y: auto;
+  overflow-x: hidden;
+  max-height: calc(100vh - 260px); 
+  scrollbar-width: none; 
+  -ms-overflow-style: none;
+}
+
+.table-body::-webkit-scrollbar {
+  display: none;
+}
+
+@media (max-width: 710px) {
+  .table {
+    height: auto;
+  }
+  
+  .table-body {
+    max-height: none;
+    overflow: visible;
+  }
+}
+
 .table-header,
 .table-row {
   display: flex;
@@ -205,7 +233,6 @@
   align-items: center;
 }
 
-/* Flexbox column definitions */
 .col-arrow {
   flex: 0 0 10px;
   justify-content: center;

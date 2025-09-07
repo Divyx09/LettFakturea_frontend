@@ -89,7 +89,7 @@ const PriceList = () => {
       e.preventDefault();
       const value = e.target.innerText;
       await handleFieldChange(index, field, value);
-      e.target.blur(); 
+      e.target.blur();
     }
   };
 
@@ -111,29 +111,36 @@ const PriceList = () => {
     const text = e.target.innerText;
     const selection = window.getSelection();
     const hasSelection = selection.toString().length > 0;
-    
+
     const allowedKeys = [
-      'Backspace', 'Delete', 'ArrowLeft', 'ArrowRight', 'ArrowUp', 'ArrowDown',
-      'Home', 'End', 'Tab', 'Enter'
+      "Backspace",
+      "Delete",
+      "ArrowLeft",
+      "ArrowRight",
+      "ArrowUp",
+      "ArrowDown",
+      "Home",
+      "End",
+      "Tab",
+      "Enter",
     ];
-    
+
     if (allowedKeys.includes(e.key)) {
       return;
     }
-    
+
     if (e.ctrlKey || e.metaKey) {
       return;
     }
-    
+
     if (hasSelection) {
       return;
     }
-    
+
     if (text.length >= maxLength && e.key.length === 1) {
       e.preventDefault();
     }
   };
-
 
   // Determine which columns to show based on screen size
   const showDescription = screenSize > 1105;
@@ -220,147 +227,154 @@ const PriceList = () => {
           )}
           <div className="col-menu"></div>
         </div>
-
-        {products.map((product, index) => {
-          return (
-            <div
-              className="table-row"
-              key={index}
-              onClick={() => handleRowClick(index)}
-              style={{
-                cursor: "pointer",
-              }}
-            >
+        <div className="table-body">
+          {products.map((product, index) => {
+            return (
               <div
-                className="col-arrow arrow"
+                className="table-row"
+                key={index}
+                onClick={() => handleRowClick(index)}
                 style={{
-                  visibility: focusedRow === index ? "visible" : "hidden",
-                  color: focusedRow === index ? "#00bfff" : "transparent",
+                  cursor: "pointer",
                 }}
               >
-                <FaArrowRightLong />
-              </div>
-
-              {showArticle && (
-                <div className="col-article">
-                  <span
-                    className="bubble"
-                    contentEditable
-                    suppressContentEditableWarning
-                    onBlur={(e) =>
-                      handleFieldChange(index, "articleNo", e.target.innerText)
-                    }
-                    onKeyPress={(e) => handleKeyPress(e, index, "articleNo")}
-                  >
-                    {product.articleNo}
-                  </span>
-                </div>
-              )}
-
-              <div className="col-name">
-                <span
-                  className="bubble ps-wid"
-                  contentEditable
-                  suppressContentEditableWarning
-                  onInput={(e) => handleInput(e, 50)}
-                  onKeyDown={(e) => handleKeyDown(e, 50)}
-                  onBlur={(e) =>
-                    handleFieldChange(index, "product", e.target.innerText)
-                  }
-                  onKeyPress={(e) => handleKeyPress(e, index, "product")}
+                <div
+                  className="col-arrow arrow"
+                  style={{
+                    visibility: focusedRow === index ? "visible" : "hidden",
+                    color: focusedRow === index ? "#00bfff" : "transparent",
+                  }}
                 >
-                  {product.product}
-                </span>
-              </div>
-
-              {showInPrice && (
-                <div className="col-in-price">
-                  <span
-                    className="bubble"
-                    contentEditable
-                    suppressContentEditableWarning
-                    onBlur={(e) =>
-                      handleFieldChange(index, "inPrice", e.target.innerText)
-                    }
-                    onKeyPress={(e) => handleKeyPress(e, index, "inPrice")}
-                  >
-                    {product.inPrice}
-                  </span>
+                  <FaArrowRightLong />
                 </div>
-              )}
 
-              <div className="col-price">
-                <span
-                  className="bubble"
-                  contentEditable
-                  suppressContentEditableWarning
-                  onBlur={(e) =>
-                    handleFieldChange(index, "price", e.target.innerText)
-                  }
-                  onKeyPress={(e) => handleKeyPress(e, index, "price")}
-                >
-                  {product.price}
-                </span>
-              </div>
+                {showArticle && (
+                  <div className="col-article">
+                    <span
+                      className="bubble"
+                      contentEditable
+                      suppressContentEditableWarning
+                      onBlur={(e) =>
+                        handleFieldChange(
+                          index,
+                          "articleNo",
+                          e.target.innerText
+                        )
+                      }
+                      onKeyPress={(e) => handleKeyPress(e, index, "articleNo")}
+                    >
+                      {product.articleNo}
+                    </span>
+                  </div>
+                )}
 
-              {showUnit && (
-                <div className="col-unit">
+                <div className="col-name">
                   <span
-                    className="bubble"
-                    contentEditable
-                    suppressContentEditableWarning
-                    onBlur={(e) =>
-                      handleFieldChange(index, "unit", e.target.innerText)
-                    }
-                    onKeyPress={(e) => handleKeyPress(e, index, "unit")}
-                  >
-                    {product.unit}
-                  </span>
-                </div>
-              )}
-
-              {showStock && (
-                <div className="col-stock">
-                  <span
-                    className="bubble"
-                    contentEditable
-                    suppressContentEditableWarning
-                    onBlur={(e) =>
-                      handleFieldChange(index, "inStock", e.target.innerText)
-                    }
-                    onKeyPress={(e) => handleKeyPress(e, index, "inStock")}
-                  >
-                    {product.inStock}
-                  </span>
-                </div>
-              )}
-
-              {showDescription && (
-                <div className="col-description">
-                  <span
-                    className="bubble decs"
+                    className="bubble ps-wid"
                     contentEditable
                     suppressContentEditableWarning
                     onInput={(e) => handleInput(e, 50)}
                     onKeyDown={(e) => handleKeyDown(e, 50)}
                     onBlur={(e) =>
-                      handleFieldChange(
-                        index,
-                        "description",
-                        e.target.innerText
-                      )
+                      handleFieldChange(index, "product", e.target.innerText)
                     }
-                    onKeyPress={(e) => handleKeyPress(e, index, "description")}
+                    onKeyPress={(e) => handleKeyPress(e, index, "product")}
                   >
-                    {product.description}
+                    {product.product}
                   </span>
                 </div>
-              )}
 
-              <div className="col-menu more-menu">⋯</div>
-            </div>
-          );
-        })}
+                {showInPrice && (
+                  <div className="col-in-price">
+                    <span
+                      className="bubble"
+                      contentEditable
+                      suppressContentEditableWarning
+                      onBlur={(e) =>
+                        handleFieldChange(index, "inPrice", e.target.innerText)
+                      }
+                      onKeyPress={(e) => handleKeyPress(e, index, "inPrice")}
+                    >
+                      {product.inPrice}
+                    </span>
+                  </div>
+                )}
+
+                <div className="col-price">
+                  <span
+                    className="bubble"
+                    contentEditable
+                    suppressContentEditableWarning
+                    onBlur={(e) =>
+                      handleFieldChange(index, "price", e.target.innerText)
+                    }
+                    onKeyPress={(e) => handleKeyPress(e, index, "price")}
+                  >
+                    {product.price}
+                  </span>
+                </div>
+
+                {showUnit && (
+                  <div className="col-unit">
+                    <span
+                      className="bubble"
+                      contentEditable
+                      suppressContentEditableWarning
+                      onBlur={(e) =>
+                        handleFieldChange(index, "unit", e.target.innerText)
+                      }
+                      onKeyPress={(e) => handleKeyPress(e, index, "unit")}
+                    >
+                      {product.unit}
+                    </span>
+                  </div>
+                )}
+
+                {showStock && (
+                  <div className="col-stock">
+                    <span
+                      className="bubble"
+                      contentEditable
+                      suppressContentEditableWarning
+                      onBlur={(e) =>
+                        handleFieldChange(index, "inStock", e.target.innerText)
+                      }
+                      onKeyPress={(e) => handleKeyPress(e, index, "inStock")}
+                    >
+                      {product.inStock}
+                    </span>
+                  </div>
+                )}
+
+                {showDescription && (
+                  <div className="col-description">
+                    <span
+                      className="bubble decs"
+                      contentEditable
+                      suppressContentEditableWarning
+                      onInput={(e) => handleInput(e, 50)}
+                      onKeyDown={(e) => handleKeyDown(e, 50)}
+                      onBlur={(e) =>
+                        handleFieldChange(
+                          index,
+                          "description",
+                          e.target.innerText
+                        )
+                      }
+                      onKeyPress={(e) =>
+                        handleKeyPress(e, index, "description")
+                      }
+                    >
+                      {product.description}
+                    </span>
+                  </div>
+                )}
+
+                <div className="col-menu more-menu">⋯</div>
+              </div>
+            );
+          })}
+        </div>
       </div>
     </div>
   );
