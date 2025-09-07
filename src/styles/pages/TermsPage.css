@@ -8,6 +8,13 @@
   width: 100%;
   z-index: 0;
   overflow-x: hidden;
+  padding-top: 80px; 
+}
+
+@media (max-width: 710px) {
+  .terms-page {
+    padding-top: 20px;
+  }
 }
 
 .terms-page::before {

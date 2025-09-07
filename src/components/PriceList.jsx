@@ -77,7 +77,6 @@ const PriceList = () => {
       console.log(`Product ${field} updated successfully`);
     } catch (error) {
       console.error(`Error updating product ${field}:`, error);
-      // Optionally revert the change or show error message
     }
   };
 
@@ -90,48 +89,59 @@ const PriceList = () => {
       e.preventDefault();
       const value = e.target.innerText;
       await handleFieldChange(index, field, value);
-      e.target.blur(); // Remove focus after saving
+      e.target.blur(); 
     }
   };
 
-  const handleSaveProduct = async (index) => {
-    const editedData = editedRows[index];
-    if (!editedData) return;
-
-    try {
-      const updatedProduct = await productsService.updateProduct(
-        editedData.id,
-        editedData
-      );
-
-      // Update the local products state
-      setProducts((prev) =>
-        prev.map((product, i) =>
-          i === index ? { ...product, ...editedData } : product
-        )
-      );
-
-      // Remove from editedRows after successful save
-      setEditedRows((prev) => {
-        const newEdited = { ...prev };
-        delete newEdited[index];
-        return newEdited;
-      });
-
-      console.log("Product updated successfully:", updatedProduct);
-    } catch (error) {
-      console.error("Error updating product:", error);
-      // You can add a toast notification here
+  // Add character limit handler for name and description fields
+  const handleInput = (e, maxLength) => {
+    const text = e.target.innerText;
+    if (text.length > maxLength) {
+      e.target.innerText = text.substring(0, maxLength);
+      const range = document.createRange();
+      const selection = window.getSelection();
+      range.selectNodeContents(e.target);
+      range.collapse(false);
+      selection.removeAllRanges();
+      selection.addRange(range);
     }
   };
+
+  const handleKeyDown = (e, maxLength) => {
+    const text = e.target.innerText;
+    const selection = window.getSelection();
+    const hasSelection = selection.toString().length > 0;
+    
+    const allowedKeys = [
+      'Backspace', 'Delete', 'ArrowLeft', 'ArrowRight', 'ArrowUp', 'ArrowDown',
+      'Home', 'End', 'Tab', 'Enter'
+    ];
+    
+    if (allowedKeys.includes(e.key)) {
+      return;
+    }
+    
+    if (e.ctrlKey || e.metaKey) {
+      return;
+    }
+    
+    if (hasSelection) {
+      return;
+    }
+    
+    if (text.length >= maxLength && e.key.length === 1) {
+      e.preventDefault();
+    }
+  };
+
 
   // Determine which columns to show based on screen size
-  const showDescription = screenSize > 1150;
+  const showDescription = screenSize > 1105;
   const showStock = screenSize > 645;
   const showUnit = screenSize > 710;
-  const showInPrice = screenSize > 1150;
+  const showInPrice = screenSize > 1105;
   const showArticle = screenSize > 710;
-  
+
   return (
     <div className="pricelist-container">
       {/* Top Bar */}
@@ -252,6 +262,8 @@ const PriceList = () => {
                   className="bubble ps-wid"
                   contentEditable
                   suppressContentEditableWarning
+                  onInput={(e) => handleInput(e, 50)}
+                  onKeyDown={(e) => handleKeyDown(e, 50)}
                   onBlur={(e) =>
                     handleFieldChange(index, "product", e.target.innerText)
                   }
@@ -329,6 +341,8 @@ const PriceList = () => {
                     className="bubble decs"
                     contentEditable
                     suppressContentEditableWarning
+                    onInput={(e) => handleInput(e, 50)}
+                    onKeyDown={(e) => handleKeyDown(e, 50)}
                     onBlur={(e) =>
                       handleFieldChange(
                         index,

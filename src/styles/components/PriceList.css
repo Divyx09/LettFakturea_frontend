@@ -5,6 +5,15 @@
   background-color: #fff;
   min-height: calc(100vh - 60px);
   box-sizing: border-box;
+  padding-top: 80px !important; /* Account for fixed header (60px) + extra spacing */
+}
+
+/* Remove top padding on small screens where header is not fixed */
+@media (max-width: 710px) {
+  .pricelist-container {
+    padding-top: 10px !important;
+    margin-left: 0;
+  }
 }
 
 /* Top bar containing search and buttons */
@@ -119,6 +128,7 @@
   .pricelist-container {
     padding: 4px 15px !important;
     margin-left: 0px;
+    padding-top: 80px !important;
   }
 }
 

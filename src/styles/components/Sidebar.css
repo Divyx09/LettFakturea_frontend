@@ -128,3 +128,10 @@
     transform: translateX(0);
   }
 }
+
+@media (max-width: 710px) {
+  .sidebar {
+    top: 0;
+    height: 100vh;
+  }
+}

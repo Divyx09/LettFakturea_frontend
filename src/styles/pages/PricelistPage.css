@@ -8,6 +8,13 @@
 .main-content {
   display: flex;
   flex: 1;
+  padding-top: 60px; 
+}
+
+@media (max-width: 710px) {
+  .main-content {
+    padding-top: 0;
+  }
 }
 
 .content-area {
