@@ -245,12 +245,15 @@
 }
 .col-article .bubble {
   text-align: start;
-  /* padding-left: 10px !important; */
+  padding-left: 10px !important;
 }
 
 .col-name {
   flex: 1 1 220px;
   min-width: 200px;
+}
+.col-name .bubble {
+  padding-left: 10px !important;
 }
 .col-name-header {
   margin-left: 10px;
@@ -292,6 +295,11 @@
   flex: 1 1 270px;
   min-width: 200px;
 }
+
+.col-description .bubble {
+  padding-left: 10px !important;
+}
+
 .col-description-header {
   margin-left: 10px;
 }
