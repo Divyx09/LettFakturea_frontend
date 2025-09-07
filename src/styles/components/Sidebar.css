@@ -1,14 +1,13 @@
 .sidebar {
   width: 220px;
-  background-color: #f9fbfd;
+  background-color: #fff;
   height: calc(100vh - 60px);
   padding: 20px 10px;
-  box-shadow: inset -1px 0 0 #e0e0e0;
+  box-shadow: 3px 0 8px rgba(0, 0, 0, 0.1);
   position: fixed;
   top: 60px;
   left: 0;
   overflow-y: auto;
-  box-sizing: border-box;
   transition: transform 0.3s ease;
 }
 
@@ -54,10 +53,6 @@
   position: relative;
 }
 
-.menu-item:hover {
-  background: #f0f4fa;
-  color: #333;
-}
 
 .menu-item:hover::before {
   content: "";
@@ -69,12 +64,6 @@
   left: 5px;
   top: 50%;
   transform: translateY(-50%);
-}
-
-.menu-item.active {
-  font-weight: 600;
-  color: #333;
-  background-color: #f0f4fa;
 }
 
 .menu-item.active::before {

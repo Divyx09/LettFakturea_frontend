@@ -3,10 +3,10 @@
   margin-left: 220px;
   font-family: "Open Sans", sans-serif !important;
   background-color: #fff;
-  height: 100vh; 
+  height: 100vh;
   box-sizing: border-box;
   padding-top: 65px;
-  overflow: hidden; 
+  overflow: hidden;
 }
 
 /* Top bar containing search and buttons */
@@ -139,8 +139,8 @@
   .pricelist-container {
     padding-top: 10px !important;
     margin-left: 0;
-    height: auto; 
-    overflow: visible; 
+    height: auto;
+    overflow: visible;
   }
 }
 
@@ -185,7 +185,7 @@
   padding: 0 10px 0 0px;
   display: flex;
   flex-direction: column;
-  height: calc(100vh - 200px); 
+  height: calc(100vh - 200px);
   /* border: 1px solid #e0e0e0; */
 }
 
@@ -193,8 +193,8 @@
   flex: 1;
   overflow-y: auto;
   overflow-x: hidden;
-  max-height: calc(100vh - 260px); 
-  scrollbar-width: none; 
+  max-height: calc(100vh - 260px);
+  scrollbar-width: none;
   -ms-overflow-style: none;
 }
 
@@ -206,7 +206,7 @@
   .table {
     height: auto;
   }
-  
+
   .table-body {
     max-height: none;
     overflow: visible;
@@ -241,7 +241,11 @@
 .col-article {
   flex: 0 0 100px;
   min-width: 80px;
-  justify-content: center;
+  justify-content: start;
+}
+.col-article .bubble {
+  text-align: start;
+  padding-left: 5px;
 }
 
 .col-name {
