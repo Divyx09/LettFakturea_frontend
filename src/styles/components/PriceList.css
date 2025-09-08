@@ -115,13 +115,13 @@
   background-color: #e1e9f07c;
 }
 
-/* Hide button text labels under 1100px */
+/* Hide button text labels under 1360px */
 @media (max-width: 1360px) {
   .pricelist-container {
     padding: 4px 15px;
     margin-left: 0px;
     padding-top: 65px;
-    overflow: hidden; /* Maintain no scroll behavior */
+    overflow: hidden; 
   }
 }
 
@@ -245,15 +245,11 @@
 }
 .col-article .bubble {
   text-align: start;
-  padding-left: 10px !important;
 }
 
 .col-name {
   flex: 1 1 220px;
   min-width: 200px;
-}
-.col-name .bubble {
-  padding-left: 10px !important;
 }
 .col-name-header {
   margin-left: 10px;
@@ -295,11 +291,6 @@
   flex: 1 1 270px;
   min-width: 200px;
 }
-
-.col-description .bubble {
-  padding-left: 10px !important;
-}
-
 .col-description-header {
   margin-left: 10px;
 }

@@ -24,9 +24,7 @@ const menuItems = [
 const Sidebar = () => {
   const handleMenuItemClick = (item, index) => {
     if (item.disabled) return;
-
     console.log(`Clicked on ${item.label}`);
-    // Add navigation logic here
   };
 
   return (

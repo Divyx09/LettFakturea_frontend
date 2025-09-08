@@ -93,7 +93,6 @@ const PriceList = () => {
     }
   };
 
-  // Add character limit handler for name and description fields
   const handleInput = (e, maxLength) => {
     const text = e.target.innerText;
     if (text.length > maxLength) {
